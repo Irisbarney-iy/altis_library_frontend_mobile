@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
-main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: Container(
-          width: 200,
-          height: 200,
-          decoration: BoxDecoration(
-            color: Colors.amberAccent,
-            shape: BoxShape.circle,
-          ),
-          child: Center(child: Text('Olá mundo')),
-        ),
+import 'core/services/routes/app_routes.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Biblioteca App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-    ),
-  );
+      initialRoute: AppRoutes.login,
+      routes: AppRoutes.routes,
+    );
+  }
 }

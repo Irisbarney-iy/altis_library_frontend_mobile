@@ -1,0 +1,10 @@
+{
+  "@@locale": "en",
+  "appName": "BibliotecaBooks",
+  "loginTitle": "Login to Account",
+  "email": "Email",
+  "password": "Password",
+  "loginButton": "Login",
+  "forgotPassword": "Forgot my password",
+  "register": "Register"
+}

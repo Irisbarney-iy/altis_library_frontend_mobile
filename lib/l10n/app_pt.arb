@@ -1,0 +1,10 @@
+{
+  "@@locale": "pt",
+  "appName": "BibliotecaBooks",
+  "loginTitle": "Acessar Conta",
+  "email": "E-mail",
+  "password": "Senha",
+  "loginButton": "Entrar",
+  "forgotPassword": "Esqueci minha senha",
+  "register": "Criar conta"
+}

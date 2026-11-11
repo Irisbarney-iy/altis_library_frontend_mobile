@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../modules/auth/pages/login_page.dart';
+import '../../../modules/auth/pages/register_page.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -17,16 +19,8 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> get routes {
     return{
-      login: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela delogin')
-          ),
-      ),
-      register: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela de cadastro')
-        ),
-      ),
+      login: (context) => const LoginPage(),
+      register: (context) => const RegisterPage(),
       forgotPassword: (context) => Scaffold(
         body: Center(
           child: Text('Tela de recuperação de senha')

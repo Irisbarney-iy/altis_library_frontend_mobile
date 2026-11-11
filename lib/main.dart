@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'l10n/app_localizations.dart';
 import 'core/services/routes/app_routes.dart';
+import 'core/theme/app_theme.dart';
+import 'l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,10 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BibliotecaBooks',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
       initialRoute: AppRoutes.login,
       routes: AppRoutes.routes,
       localizationsDelegates: const [

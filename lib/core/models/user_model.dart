@@ -1,5 +1,5 @@
 class UserModel{
-  final int id;
+  final int? id;
   final String name;
   final String email;
   final String? cpf;
@@ -10,7 +10,7 @@ class UserModel{
   final String? token;
 
   UserModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.email,
     this.cpf,
@@ -21,7 +21,11 @@ class UserModel{
     this.token,
   });
 
-  bool get isAdmin => role == 'ADMIN';
+  bool get isAdmin {
+    if(role == null) return false;
+    final formattedRole = role!.toUpperCase().trim();
+    return formattedRole == 'ADMIN' || formattedRole == 'ROLE_ADMIN';
+  }
 
   factory UserModel.fromJson(Map<String, dynamic> json, {String? token}){
     return UserModel(

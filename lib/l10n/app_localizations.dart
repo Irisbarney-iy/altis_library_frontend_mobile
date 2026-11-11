@@ -109,7 +109,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginTitle.
   ///
   /// In pt, this message translates to:
-  /// **'Acessar Conta'**
+  /// **'Bem-vindo de volta!'**
   String get loginTitle;
 
   /// No description provided for @email.
@@ -118,17 +118,29 @@ abstract class AppLocalizations {
   /// **'E-mail'**
   String get email;
 
+  /// No description provided for @emailHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex: exemplo@gmail.com'**
+  String get emailHint;
+
   /// No description provided for @password.
   ///
   /// In pt, this message translates to:
   /// **'Senha'**
   String get password;
 
-  /// No description provided for @loginButton.
+  /// No description provided for @passwordHint.
   ///
   /// In pt, this message translates to:
-  /// **'Entrar'**
-  String get loginButton;
+  /// **'Digite sua senha'**
+  String get passwordHint;
+
+  /// No description provided for @rememberMe.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lembrar-me'**
+  String get rememberMe;
 
   /// No description provided for @forgotPassword.
   ///
@@ -136,11 +148,197 @@ abstract class AppLocalizations {
   /// **'Esqueci minha senha'**
   String get forgotPassword;
 
-  /// No description provided for @register.
+  /// No description provided for @clear.
   ///
   /// In pt, this message translates to:
-  /// **'Criar conta'**
-  String get register;
+  /// **'Limpar'**
+  String get clear;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entrar'**
+  String get loginButton;
+
+  /// No description provided for @dontHaveAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não tem uma conta? '**
+  String get dontHaveAccount;
+
+  /// No description provided for @signUpHere.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastre-se aqui'**
+  String get signUpHere;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'O e-mail é obrigatório'**
+  String get emailRequired;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'A senha é obrigatória'**
+  String get passwordRequired;
+
+  /// No description provided for @registerTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bem-vindo!'**
+  String get registerTitle;
+
+  /// No description provided for @fullName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome completo'**
+  String get fullName;
+
+  /// No description provided for @fullNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Digite seu nome completo'**
+  String get fullNameHint;
+
+  /// No description provided for @cpf.
+  ///
+  /// In pt, this message translates to:
+  /// **'CPF'**
+  String get cpf;
+
+  /// No description provided for @cpfHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'000.000.000-00'**
+  String get cpfHint;
+
+  /// No description provided for @phone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Telefone'**
+  String get phone;
+
+  /// No description provided for @phoneHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'(85) 99737-7275'**
+  String get phoneHint;
+
+  /// No description provided for @birthDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Data de nascimento'**
+  String get birthDate;
+
+  /// No description provided for @birthDateHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'AAAA-MM-DD'**
+  String get birthDateHint;
+
+  /// No description provided for @address.
+  ///
+  /// In pt, this message translates to:
+  /// **'Endereço'**
+  String get address;
+
+  /// No description provided for @addressHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rua, Nº - Bairro, Cidade'**
+  String get addressHint;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmar senha'**
+  String get confirmPassword;
+
+  /// No description provided for @confirmPasswordHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirme sua senha'**
+  String get confirmPasswordHint;
+
+  /// No description provided for @signUpButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastrar'**
+  String get signUpButton;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Já tem uma conta? '**
+  String get alreadyHaveAccount;
+
+  /// No description provided for @loginHere.
+  ///
+  /// In pt, this message translates to:
+  /// **'Faça login aqui'**
+  String get loginHere;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In pt, this message translates to:
+  /// **'As senhas não coincidem'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @registerSuccess.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastro realizado com sucesso! Faça login para continuar.'**
+  String get registerSuccess;
+
+  /// No description provided for @invalidNameLength.
+  ///
+  /// In pt, this message translates to:
+  /// **'O nome deve ter entre 3 e 100 caracteres'**
+  String get invalidNameLength;
+
+  /// No description provided for @invalidEmailGmail.
+  ///
+  /// In pt, this message translates to:
+  /// **'O e-mail deve ser @gmail.com'**
+  String get invalidEmailGmail;
+
+  /// No description provided for @cpfRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'O CPF é obrigatório'**
+  String get cpfRequired;
+
+  /// No description provided for @phoneRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'O telefone é obrigatório'**
+  String get phoneRequired;
+
+  /// No description provided for @addressRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'O endereço é obrigatório'**
+  String get addressRequired;
+
+  /// No description provided for @birthDateRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'A data de nascimento é obrigatória'**
+  String get birthDateRequired;
+
+  /// No description provided for @minimumAgeRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'É necessário ter no mínimo 6 anos para se cadastrar'**
+  String get minimumAgeRequired;
+
+  /// No description provided for @passwordRequirements.
+  ///
+  /// In pt, this message translates to:
+  /// **'A senha deve ter entre 8 e 15 caracteres, com letras, números e símbolos'**
+  String get passwordRequirements;
 }
 
 class _AppLocalizationsDelegate

@@ -39,5 +39,16 @@
   "addressRequired": "O endereço é obrigatório",
   "birthDateRequired": "A data de nascimento é obrigatória",
   "minimumAgeRequired": "É necessário ter no mínimo 6 anos para se cadastrar",
-  "passwordRequirements": "A senha deve ter entre 8 e 15 caracteres, com letras, números e símbolos"
+  "passwordRequirements": "A senha deve ter entre 8 e 15 caracteres, com letras, números e símbolos",
+  "forgotPasswordTitle": "Recuperar Senha",
+  "forgotPasswordSubtitle": "Informe seu e-mail e CPF para validar sua conta",
+  "validateButton": "Validar Dados",
+  "resetPasswordTitle": "Nova Senha",
+  "resetPasswordSubtitle": "Crie uma nova senha de 8 a 15 caracteres",
+  "newPassword": "Nova senha",
+  "newPasswordHint": "Digite sua nova senha",
+  "resetPasswordButton": "Redefinir Senha",
+  "passwordResetSuccess": "Senha redefinida com sucesso! Faça login com a nova senha.",
+  "validationSuccess": "Dados validados com sucesso! Defina sua nova senha.",
+  "tokenRequired": "O token de recuperação é obrigatório"
 }

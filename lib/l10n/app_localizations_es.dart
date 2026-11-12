@@ -132,4 +132,41 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get passwordRequirements =>
       'La contraseña debe tener de 8 a 15 caracteres, con letras, números y símbolos';
+
+  @override
+  String get forgotPasswordTitle => 'Recuperar Contraseña';
+
+  @override
+  String get forgotPasswordSubtitle =>
+      'Ingrese su correo y CPF para validar su cuenta';
+
+  @override
+  String get validateButton => 'Validar Datos';
+
+  @override
+  String get resetPasswordTitle => 'Nueva Contraseña';
+
+  @override
+  String get resetPasswordSubtitle =>
+      'Cree una nueva contraseña de 8 a 15 caracteres';
+
+  @override
+  String get newPassword => 'Nueva contraseña';
+
+  @override
+  String get newPasswordHint => 'Ingrese su nueva contraseña';
+
+  @override
+  String get resetPasswordButton => 'Restablecer Contraseña';
+
+  @override
+  String get passwordResetSuccess =>
+      '¡Contraseña restablecida con éxito! Inicie sesión con la nueva contraseña.';
+
+  @override
+  String get validationSuccess =>
+      '¡Datos validados con éxito! Defina su nueva contraseña.';
+
+  @override
+  String get tokenRequired => 'El token de recuperación es obligatorio';
 }

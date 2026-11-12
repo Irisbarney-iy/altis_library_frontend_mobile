@@ -339,6 +339,72 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'A senha deve ter entre 8 e 15 caracteres, com letras, números e símbolos'**
   String get passwordRequirements;
+
+  /// No description provided for @forgotPasswordTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recuperar Senha'**
+  String get forgotPasswordTitle;
+
+  /// No description provided for @forgotPasswordSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe seu e-mail e CPF para validar sua conta'**
+  String get forgotPasswordSubtitle;
+
+  /// No description provided for @validateButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Validar Dados'**
+  String get validateButton;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova Senha'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @resetPasswordSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crie uma nova senha de 8 a 15 caracteres'**
+  String get resetPasswordSubtitle;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova senha'**
+  String get newPassword;
+
+  /// No description provided for @newPasswordHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Digite sua nova senha'**
+  String get newPasswordHint;
+
+  /// No description provided for @resetPasswordButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Redefinir Senha'**
+  String get resetPasswordButton;
+
+  /// No description provided for @passwordResetSuccess.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha redefinida com sucesso! Faça login com a nova senha.'**
+  String get passwordResetSuccess;
+
+  /// No description provided for @validationSuccess.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dados validados com sucesso! Defina sua nova senha.'**
+  String get validationSuccess;
+
+  /// No description provided for @tokenRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'O token de recuperação é obrigatório'**
+  String get tokenRequired;
 }
 
 class _AppLocalizationsDelegate

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../modules/auth/pages/login_page.dart';
 import '../../../modules/auth/pages/register_page.dart';
+import '../../../modules/auth/pages/forgot_password_page.dart';
 
 class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
   static const String forgotPassword = '/forgot-password';
-  static const String resetPassword = '/auth/recover-password/reset';
 
   static const String adminDashboard = '/admin/dashboard';
   static const String adminUsers = '/admin/users';
@@ -21,16 +21,7 @@ class AppRoutes {
     return{
       login: (context) => const LoginPage(),
       register: (context) => const RegisterPage(),
-      forgotPassword: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela de recuperação de senha')
-        ),
-      ),
-      resetPassword: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela de redefinição de senha')
-        ),
-      ),
+      forgotPassword: (context) => const ForgotPasswordPage(),
       adminDashboard: (context) => Scaffold(
         body: Center(
           child: Text('Tela de dashboard do administrador')

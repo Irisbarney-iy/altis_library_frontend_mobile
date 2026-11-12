@@ -55,15 +55,49 @@ class AuthService{
     }
   }
 
-  Future<void> recoverPassword(String email) async{
+  Future<String> validatePasswordReset(String email, String cpf) async {
     final response = await http.post(
-      Uri.parse('$_baseUrl/auth/recover-password'),
-      headers: {'Content-Type':'application/json'},
-      body: jsonEncode({'email': email}),
+      Uri.parse('$_baseUrl/auth/recover-password/validate'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'email': email,
+        'cpf': cpf,
+      }),
+    ).timeout(
+      const Duration(seconds: 10),
+      onTimeout: () => throw Exception('Tempo limite excedido ao conectar ao servidor.'),
     );
 
-    if(response.statusCode != 200){
-      throw Exception('Erro ao recuperar senha. Verifique o email');
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      return data['recoveryToken'] ?? data['token'] ?? '';
+    } else if (response.statusCode == 404 || response.statusCode == 400) {
+      throw Exception('E-mail ou CPF não encontrados.');
+    } else {
+      throw Exception('Falha ao validar dados. Código: ${response.statusCode}');
+    }
+  }
+
+  Future<void> resetPassword(String recoveryToken, String newPassword, String confirmPassword) async {
+    final response = await http.post(
+      Uri.parse('$_baseUrl/auth/recover-password/reset'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'recoveryToken': recoveryToken,
+        'newPassword': newPassword,
+        'confirmPassword': confirmPassword,
+      }),
+    ).timeout(
+      const Duration(seconds: 10),
+      onTimeout: () => throw Exception('Tempo limite excedido ao conectar ao servidor.'),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 204) {
+      return;
+    } else if (response.statusCode == 400) {
+      throw Exception('Dados inválidos ou token expirado.');
+    } else {
+      throw Exception('Falha ao redefinir senha. Código: ${response.statusCode}');
     }
   }
 }

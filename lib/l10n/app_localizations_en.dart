@@ -131,4 +131,41 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get passwordRequirements =>
       'Password must be 8-15 characters, including letters, numbers, and symbols';
+
+  @override
+  String get forgotPasswordTitle => 'Recover Password';
+
+  @override
+  String get forgotPasswordSubtitle =>
+      'Enter your email and CPF to validate your account';
+
+  @override
+  String get validateButton => 'Validate Info';
+
+  @override
+  String get resetPasswordTitle => 'New Password';
+
+  @override
+  String get resetPasswordSubtitle =>
+      'Create a new password from 8 to 15 characters';
+
+  @override
+  String get newPassword => 'New password';
+
+  @override
+  String get newPasswordHint => 'Enter your new password';
+
+  @override
+  String get resetPasswordButton => 'Reset Password';
+
+  @override
+  String get passwordResetSuccess =>
+      'Password reset successfully! Please login with your new password.';
+
+  @override
+  String get validationSuccess =>
+      'Data validated successfully! Set your new password.';
+
+  @override
+  String get tokenRequired => 'Recovery token is required';
 }

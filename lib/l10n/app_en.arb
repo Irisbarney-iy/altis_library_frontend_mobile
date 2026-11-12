@@ -39,5 +39,16 @@
   "addressRequired": "Address is required",
   "birthDateRequired": "Birth date is required",
   "minimumAgeRequired": "You must be at least 6 years old to register",
-  "passwordRequirements": "Password must be 8-15 characters, including letters, numbers, and symbols"
+  "passwordRequirements": "Password must be 8-15 characters, including letters, numbers, and symbols",
+  "forgotPasswordTitle": "Recover Password",
+  "forgotPasswordSubtitle": "Enter your email and CPF to validate your account",
+  "validateButton": "Validate Info",
+  "resetPasswordTitle": "New Password",
+  "resetPasswordSubtitle": "Create a new password from 8 to 15 characters",
+  "newPassword": "New password",
+  "newPasswordHint": "Enter your new password",
+  "resetPasswordButton": "Reset Password",
+  "passwordResetSuccess": "Password reset successfully! Please login with your new password.",
+  "validationSuccess": "Data validated successfully! Set your new password.",
+  "tokenRequired": "Recovery token is required"
 }

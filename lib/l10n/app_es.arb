@@ -39,5 +39,16 @@
   "addressRequired": "La dirección es obligatoria",
   "birthDateRequired": "La fecha de nacimiento es obligatoria",
   "minimumAgeRequired": "Debe tener al menos 6 años para registrarse",
-  "passwordRequirements": "La contraseña debe tener de 8 a 15 caracteres, con letras, números y símbolos"
+  "passwordRequirements": "La contraseña debe tener de 8 a 15 caracteres, con letras, números y símbolos",
+  "forgotPasswordTitle": "Recuperar Contraseña",
+  "forgotPasswordSubtitle": "Ingrese su correo y CPF para validar su cuenta",
+  "validateButton": "Validar Datos",
+  "resetPasswordTitle": "Nueva Contraseña",
+  "resetPasswordSubtitle": "Cree una nueva contraseña de 8 a 15 caracteres",
+  "newPassword": "Nueva contraseña",
+  "newPasswordHint": "Ingrese su nueva contraseña",
+  "resetPasswordButton": "Restablecer Contraseña",
+  "passwordResetSuccess": "¡Contraseña restablecida con éxito! Inicie sesión con la nueva contraseña.",
+  "validationSuccess": "¡Datos validados con éxito! Defina su nueva contraseña.",
+  "tokenRequired": "El token de recuperación es obligatorio"
 }

@@ -22,7 +22,6 @@ class UserModel{
   });
 
   bool get isAdmin {
-    if(role == null) return false;
     final formattedRole = role!.toUpperCase().trim();
     return formattedRole == 'ADMIN' || formattedRole == 'ROLE_ADMIN';
   }

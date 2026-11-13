@@ -169,4 +169,67 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get tokenRequired => 'El token de recuperación es obligatorio';
+
+  @override
+  String get logout => 'Cerrar sesión';
+
+  @override
+  String get settings => 'ajustes';
+
+  @override
+  String get menuDashboard => 'Panel';
+
+  @override
+  String get menuLoans => 'Préstamos';
+
+  @override
+  String get menuUsers => 'Usuarios';
+
+  @override
+  String get menuBooks => 'Libros';
+
+  @override
+  String get menuPublishers => 'Editoriales';
+
+  @override
+  String get searchPublishers => 'Buscar editoriales...';
+
+  @override
+  String get newPublisher => 'Nueva Editorial';
+
+  @override
+  String get editPublisher => 'Editar Editorial';
+
+  @override
+  String get publisherName => 'Nombre de la Editorial';
+
+  @override
+  String get website => 'Sitio web';
+
+  @override
+  String get actions => 'Acciones';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get save => 'Guardar';
+
+  @override
+  String get delete => 'Eliminar';
+
+  @override
+  String get deleteConfirmTitle => 'Confirmar Eliminación';
+
+  @override
+  String get deletePublisherConfirm => '¿Realmente desea eliminar la editorial';
+
+  @override
+  String get publisherCreated => '¡Editorial creada con éxito!';
+
+  @override
+  String get publisherUpdated => '¡Editorial actualizada con éxito!';
+
+  @override
+  String get publisherDeleted => '¡Editorial eliminada con éxito!';
 }

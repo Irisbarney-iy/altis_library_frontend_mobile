@@ -168,4 +168,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tokenRequired => 'Recovery token is required';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get settings => 'settings';
+
+  @override
+  String get menuDashboard => 'Dashboard';
+
+  @override
+  String get menuLoans => 'Loans';
+
+  @override
+  String get menuUsers => 'Users';
+
+  @override
+  String get menuBooks => 'Books';
+
+  @override
+  String get menuPublishers => 'Publishers';
+
+  @override
+  String get searchPublishers => 'Search publishers...';
+
+  @override
+  String get newPublisher => 'New Publisher';
+
+  @override
+  String get editPublisher => 'Edit Publisher';
+
+  @override
+  String get publisherName => 'Publisher Name';
+
+  @override
+  String get website => 'Website';
+
+  @override
+  String get actions => 'Actions';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get deleteConfirmTitle => 'Confirm Deletion';
+
+  @override
+  String get deletePublisherConfirm =>
+      'Are you sure you want to delete publisher';
+
+  @override
+  String get publisherCreated => 'Publisher created successfully!';
+
+  @override
+  String get publisherUpdated => 'Publisher updated successfully!';
+
+  @override
+  String get publisherDeleted => 'Publisher deleted successfully!';
 }

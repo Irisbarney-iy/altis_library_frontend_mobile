@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../core/services/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../l10n/app_localizations.dart';
-import '../../../core/services/auth_service.dart';
+import '../../../../core/services/routes/app_routes.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../service/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

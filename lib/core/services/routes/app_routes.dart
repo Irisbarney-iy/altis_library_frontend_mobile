@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../modules/auth/pages/login_page.dart';
-import '../../../modules/auth/pages/register_page.dart';
-import '../../../modules/auth/pages/forgot_password_page.dart';
+import '../../../modules/auth/presentation/pages/login_page.dart';
+import '../../../modules/auth/presentation/pages/register_page.dart';
+import '../../../modules/auth/presentation/pages/forgot_password_page.dart';
+import '../../../modules/admin/pages/admin_publishers_page.dart';
+import '../../../modules/admin/pages/admin_dashboard_page.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -22,21 +24,13 @@ class AppRoutes {
       login: (context) => const LoginPage(),
       register: (context) => const RegisterPage(),
       forgotPassword: (context) => const ForgotPasswordPage(),
-      adminDashboard: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela de dashboard do administrador')
-        ),
-      ),
+      adminDashboard: (context) => const AdminDashboardPage(),
       adminUsers: (context) => Scaffold(
         body: Center(
           child: Text('Tela de gerenciamento de usuários')
         ),
       ),
-      adminPublishers: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela de gerenciamento de editoras')
-        ),
-      ),
+      adminPublishers: (context) => const AdminPublishersPage(),
       adminBooks: (context) => Scaffold(
         body: Center(
           child: Text('Tela de gerenciamento de livros')

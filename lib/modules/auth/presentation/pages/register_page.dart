@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../core/models/user_model.dart';
-import '../../../core/services/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/utils/input_formatters.dart';
-import '../../../l10n/app_localizations.dart';
-import '../../../core/services/auth_service.dart';
+import '../../../../core/models/user_model.dart';
+import '../../../../core/services/routes/app_routes.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/input_formatters.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../service/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

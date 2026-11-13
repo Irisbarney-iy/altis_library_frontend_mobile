@@ -405,6 +405,132 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'O token de recuperação é obrigatório'**
   String get tokenRequired;
+
+  /// No description provided for @logout.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair'**
+  String get logout;
+
+  /// No description provided for @settings.
+  ///
+  /// In pt, this message translates to:
+  /// **'configurações'**
+  String get settings;
+
+  /// No description provided for @menuDashboard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dashboard'**
+  String get menuDashboard;
+
+  /// No description provided for @menuLoans.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimos'**
+  String get menuLoans;
+
+  /// No description provided for @menuUsers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usuários'**
+  String get menuUsers;
+
+  /// No description provided for @menuBooks.
+  ///
+  /// In pt, this message translates to:
+  /// **'Livros'**
+  String get menuBooks;
+
+  /// No description provided for @menuPublishers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editoras'**
+  String get menuPublishers;
+
+  /// No description provided for @searchPublishers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar editoras...'**
+  String get searchPublishers;
+
+  /// No description provided for @newPublisher.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova Editora'**
+  String get newPublisher;
+
+  /// No description provided for @editPublisher.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar Editora'**
+  String get editPublisher;
+
+  /// No description provided for @publisherName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome da Editora'**
+  String get publisherName;
+
+  /// No description provided for @website.
+  ///
+  /// In pt, this message translates to:
+  /// **'Site'**
+  String get website;
+
+  /// No description provided for @actions.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ações'**
+  String get actions;
+
+  /// No description provided for @cancel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cancelar'**
+  String get cancel;
+
+  /// No description provided for @save.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvar'**
+  String get save;
+
+  /// No description provided for @delete.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir'**
+  String get delete;
+
+  /// No description provided for @deleteConfirmTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmar Exclusão'**
+  String get deleteConfirmTitle;
+
+  /// No description provided for @deletePublisherConfirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deseja realmente excluir a editora'**
+  String get deletePublisherConfirm;
+
+  /// No description provided for @publisherCreated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editora cadastrada com sucesso!'**
+  String get publisherCreated;
+
+  /// No description provided for @publisherUpdated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editora atualizada com sucesso!'**
+  String get publisherUpdated;
+
+  /// No description provided for @publisherDeleted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editora excluída com sucesso!'**
+  String get publisherDeleted;
 }
 
 class _AppLocalizationsDelegate

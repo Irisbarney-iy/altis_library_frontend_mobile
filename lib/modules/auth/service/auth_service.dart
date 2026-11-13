@@ -1,33 +1,45 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../../core/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/models/user_model.dart';
 
-class AuthService{
+class AuthService {
   static const String _baseUrl = 'http://10.0.2.2:8080';
-  Future<UserModel> login(String email, String password) async{
+  static const String _tokenKey = 'jwt_token';
+  static const String _roleKey = 'user_role';
+
+  Future<UserModel> login(String email, String password) async {
     final response = await http.post(
       Uri.parse('$_baseUrl/auth/login'),
-      headers: {'Content-Type':'application/json'},
+      headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'email': email,
         'password': password,
       }),
     ).timeout(
       const Duration(seconds: 20),
-      onTimeout: (){
+      onTimeout: () {
         throw Exception("Tempo de conexão esgotado. Verifique a internet!");
-      }
+      },
     );
 
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
       final String? token = data['token'];
-      final Map<String, dynamic> UserData = (data['user'] != null && data['user'] is Map<String, dynamic>) ? data['user'] : data;
+      final String role = data['role'] ?? '';
+      final Map<String, dynamic> userData =
+          (data['user'] != null && data['user'] is Map<String, dynamic>)
+              ? data['user']
+              : data;
 
-      return UserModel.fromJson(UserData, token: token);
-    }else if(response.statusCode == 401){
+      if (token != null && token.isNotEmpty) {
+        await saveSession(token, role);
+      }
+
+      return UserModel.fromJson(userData, token: token);
+    } else if (response.statusCode == 401) {
       throw Exception('Email ou senha incorretos');
-    }else{
+    } else {
       throw Exception('Falha ao realizar login. Tente novamente.');
     }
   }
@@ -99,5 +111,26 @@ class AuthService{
     } else {
       throw Exception('Falha ao redefinir senha. Código: ${response.statusCode}');
     }
+  }
+
+  static Future<Map<String, String>> getAuthHeaders() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString(_tokenKey) ?? '';
+    return {
+      'Content-Type': 'application/json',
+      if (token.isNotEmpty) 'Authorization': 'Bearer $token',
+    };
+  }
+
+  static Future<void> saveSession(String token, String role) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_tokenKey, token);
+    await prefs.setString(_roleKey, role);
+  }
+
+  static Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_tokenKey);
+    await prefs.remove(_roleKey);
   }
 }

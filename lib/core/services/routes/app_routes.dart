@@ -5,6 +5,7 @@ import '../../../modules/auth/presentation/pages/forgot_password_page.dart';
 import '../../../modules/admin/pages/admin_publishers_page.dart';
 import '../../../modules/admin/pages/admin_dashboard_page.dart';
 import '../../../modules/admin/pages/admin_books_page.dart';
+import '../../../modules/admin/pages/admin_users_page.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -26,11 +27,7 @@ class AppRoutes {
       register: (context) => const RegisterPage(),
       forgotPassword: (context) => const ForgotPasswordPage(),
       adminDashboard: (context) => const AdminDashboardPage(),
-      adminUsers: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela de gerenciamento de usuários')
-        ),
-      ),
+      adminUsers: (context) => AdminUsersPage(),
       adminPublishers: (context) => const AdminPublishersPage(),
       adminBooks: (context) => AdminBooksPage(),
       adminLoans: (context) => Scaffold(

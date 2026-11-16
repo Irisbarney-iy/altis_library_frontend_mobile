@@ -645,6 +645,72 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Livro excluído com sucesso!'**
   String get bookDeleted;
+
+  /// No description provided for @searchUsers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar usuários...'**
+  String get searchUsers;
+
+  /// No description provided for @filter.
+  ///
+  /// In pt, this message translates to:
+  /// **'Filtrar'**
+  String get filter;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todos'**
+  String get filterAll;
+
+  /// No description provided for @status.
+  ///
+  /// In pt, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @statusActive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativo'**
+  String get statusActive;
+
+  /// No description provided for @statusInactive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Inativo'**
+  String get statusInactive;
+
+  /// No description provided for @userActivated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usuário ativado com sucesso!'**
+  String get userActivated;
+
+  /// No description provided for @userDeactivated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usuário desativado com sucesso!'**
+  String get userDeactivated;
+
+  /// No description provided for @sortAZ.
+  ///
+  /// In pt, this message translates to:
+  /// **'De A a Z'**
+  String get sortAZ;
+
+  /// No description provided for @sortZA.
+  ///
+  /// In pt, this message translates to:
+  /// **'De Z a A'**
+  String get sortZA;
+
+  /// No description provided for @sortMostRecent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mais recente'**
+  String get sortMostRecent;
 }
 
 class _AppLocalizationsDelegate

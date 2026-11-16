@@ -288,4 +288,37 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get bookDeleted => 'Livro excluído com sucesso!';
+
+  @override
+  String get searchUsers => 'Buscar usuários...';
+
+  @override
+  String get filter => 'Filtrar';
+
+  @override
+  String get filterAll => 'Todos';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get statusActive => 'Ativo';
+
+  @override
+  String get statusInactive => 'Inativo';
+
+  @override
+  String get userActivated => 'Usuário ativado com sucesso!';
+
+  @override
+  String get userDeactivated => 'Usuário desativado com sucesso!';
+
+  @override
+  String get sortAZ => 'De A a Z';
+
+  @override
+  String get sortZA => 'De Z a A';
+
+  @override
+  String get sortMostRecent => 'Mais recente';
 }

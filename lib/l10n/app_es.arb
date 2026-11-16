@@ -90,5 +90,16 @@
   "deleteBookConfirm": "¿Realmente desea eliminar el libro",
   "bookCreated": "¡Libro creado con éxito!",
   "bookUpdated": "¡Libro actualizado con éxito!",
-  "bookDeleted": "¡Libro eliminado con éxito!"
+  "bookDeleted": "¡Libro eliminado con éxito!",
+  "searchUsers": "Search users...",
+  "filter": "Filter",
+  "filterAll": "All",
+  "status": "Status",
+  "statusActive": "Active",
+  "statusInactive": "Inactive",
+  "userActivated": "User activated successfully!",
+  "userDeactivated": "User deactivated successfully!",
+  "sortAZ": "De A a Z",
+  "sortZA": "De Z a A",
+  "sortMostRecent": "Más reciente"
 }

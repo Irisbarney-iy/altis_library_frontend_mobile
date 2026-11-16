@@ -321,4 +321,70 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get sortMostRecent => 'Mais recente';
+
+  @override
+  String get searchLoans => 'Buscar empréstimos...';
+
+  @override
+  String get newRental => 'Novo Aluguel';
+
+  @override
+  String get renter => 'Locatário';
+
+  @override
+  String get book => 'Livro';
+
+  @override
+  String get rentalDate => 'Data Aluguel';
+
+  @override
+  String get limitDate => 'Prazo';
+
+  @override
+  String get returnedDate => 'Entrega';
+
+  @override
+  String get renew => 'Renovar';
+
+  @override
+  String get renewLoanTitle => 'Renovar Empréstimo';
+
+  @override
+  String get newLimitDate => 'Novo Prazo Limite';
+
+  @override
+  String get returnBookTitle => 'Confirmar Devolução';
+
+  @override
+  String get returnBookConfirm => 'Deseja registrar a devolução do livro';
+
+  @override
+  String get confirm => 'Confirmar';
+
+  @override
+  String get renterRequired => 'Selecione um locatário';
+
+  @override
+  String get bookRequired => 'Selecione um livro';
+
+  @override
+  String get loanCreated => 'Empréstimo registrado com sucesso!';
+
+  @override
+  String get loanRenewed => 'Empréstimo renovado com sucesso!';
+
+  @override
+  String get loanReturned => 'Devolução registrada com sucesso!';
+
+  @override
+  String get loanStatusOnTime => 'No Prazo';
+
+  @override
+  String get loanStatusOverdue => 'Atrasado';
+
+  @override
+  String get loanStatusRtdOnTime => 'Entre.NP';
+
+  @override
+  String get loanStatusRtdDelayed => 'Entre.CA';
 }

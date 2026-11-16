@@ -6,6 +6,7 @@ import '../../../modules/admin/pages/admin_publishers_page.dart';
 import '../../../modules/admin/pages/admin_dashboard_page.dart';
 import '../../../modules/admin/pages/admin_books_page.dart';
 import '../../../modules/admin/pages/admin_users_page.dart';
+import '../../../modules/admin/pages/admin_loans_page.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -29,12 +30,8 @@ class AppRoutes {
       adminDashboard: (context) => const AdminDashboardPage(),
       adminUsers: (context) => AdminUsersPage(),
       adminPublishers: (context) => const AdminPublishersPage(),
-      adminBooks: (context) => AdminBooksPage(),
-      adminLoans: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela de gerenciamento de empréstimos')
-        ),
-      ),
+      adminBooks: (context) => const AdminBooksPage(),
+      adminLoans: (context) => const AdminLoansPage(),
       userDashboard: (context) => Scaffold(
         body: Center(
           child: Text('Tela de dashboard do usuário')

@@ -323,4 +323,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sortMostRecent => 'Most recent';
+
+  @override
+  String get searchLoans => 'Search loans...';
+
+  @override
+  String get newRental => 'New Rental';
+
+  @override
+  String get renter => 'Renter';
+
+  @override
+  String get book => 'Book';
+
+  @override
+  String get rentalDate => 'Rental Date';
+
+  @override
+  String get limitDate => 'Limit Date';
+
+  @override
+  String get returnedDate => 'Returned Date';
+
+  @override
+  String get renew => 'Renew';
+
+  @override
+  String get renewLoanTitle => 'Renew Loan';
+
+  @override
+  String get newLimitDate => 'New Limit Date';
+
+  @override
+  String get returnBookTitle => 'Confirm Return';
+
+  @override
+  String get returnBookConfirm => 'Do you want to register the return of';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get renterRequired => 'Select a renter';
+
+  @override
+  String get bookRequired => 'Select a book';
+
+  @override
+  String get loanCreated => 'Loan created successfully!';
+
+  @override
+  String get loanRenewed => 'Loan renewed successfully!';
+
+  @override
+  String get loanReturned => 'Book returned successfully!';
+
+  @override
+  String get loanStatusOnTime => 'On Time';
+
+  @override
+  String get loanStatusOverdue => 'Overdue';
+
+  @override
+  String get loanStatusRtdOnTime => 'Rtd.OnTime';
+
+  @override
+  String get loanStatusRtdDelayed => 'Rtd.Delayed';
 }

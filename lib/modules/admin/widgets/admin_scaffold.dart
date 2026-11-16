@@ -162,10 +162,14 @@ class AdminScaffold extends StatelessWidget {
             fontSize: 14,
           ),
         ),
-        onTap: () {
+      onTap: () {
           Navigator.pop(context);
           if (!isActive) {
-            Navigator.pushReplacementNamed(context, route);
+            Future.delayed(const Duration(milliseconds: 150), () {
+              if (context.mounted) {
+                Navigator.pushReplacementNamed(context, route);
+              }
+            });
           }
         },
       ),

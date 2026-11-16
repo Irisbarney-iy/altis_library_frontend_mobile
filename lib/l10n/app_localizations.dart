@@ -711,6 +711,138 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Mais recente'**
   String get sortMostRecent;
+
+  /// No description provided for @searchLoans.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar empréstimos...'**
+  String get searchLoans;
+
+  /// No description provided for @newRental.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo Aluguel'**
+  String get newRental;
+
+  /// No description provided for @renter.
+  ///
+  /// In pt, this message translates to:
+  /// **'Locatário'**
+  String get renter;
+
+  /// No description provided for @book.
+  ///
+  /// In pt, this message translates to:
+  /// **'Livro'**
+  String get book;
+
+  /// No description provided for @rentalDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Data Aluguel'**
+  String get rentalDate;
+
+  /// No description provided for @limitDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prazo'**
+  String get limitDate;
+
+  /// No description provided for @returnedDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entrega'**
+  String get returnedDate;
+
+  /// No description provided for @renew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Renovar'**
+  String get renew;
+
+  /// No description provided for @renewLoanTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Renovar Empréstimo'**
+  String get renewLoanTitle;
+
+  /// No description provided for @newLimitDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo Prazo Limite'**
+  String get newLimitDate;
+
+  /// No description provided for @returnBookTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmar Devolução'**
+  String get returnBookTitle;
+
+  /// No description provided for @returnBookConfirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deseja registrar a devolução do livro'**
+  String get returnBookConfirm;
+
+  /// No description provided for @confirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmar'**
+  String get confirm;
+
+  /// No description provided for @renterRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selecione um locatário'**
+  String get renterRequired;
+
+  /// No description provided for @bookRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selecione um livro'**
+  String get bookRequired;
+
+  /// No description provided for @loanCreated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimo registrado com sucesso!'**
+  String get loanCreated;
+
+  /// No description provided for @loanRenewed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimo renovado com sucesso!'**
+  String get loanRenewed;
+
+  /// No description provided for @loanReturned.
+  ///
+  /// In pt, this message translates to:
+  /// **'Devolução registrada com sucesso!'**
+  String get loanReturned;
+
+  /// No description provided for @loanStatusOnTime.
+  ///
+  /// In pt, this message translates to:
+  /// **'No Prazo'**
+  String get loanStatusOnTime;
+
+  /// No description provided for @loanStatusOverdue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atrasado'**
+  String get loanStatusOverdue;
+
+  /// No description provided for @loanStatusRtdOnTime.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entre.NP'**
+  String get loanStatusRtdOnTime;
+
+  /// No description provided for @loanStatusRtdDelayed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entre.CA'**
+  String get loanStatusRtdDelayed;
 }
 
 class _AppLocalizationsDelegate

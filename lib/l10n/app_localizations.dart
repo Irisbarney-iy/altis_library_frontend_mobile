@@ -531,6 +531,120 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Editora excluída com sucesso!'**
   String get publisherDeleted;
+
+  /// No description provided for @searchBooks.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar livros...'**
+  String get searchBooks;
+
+  /// No description provided for @newBook.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo Livro'**
+  String get newBook;
+
+  /// No description provided for @editBook.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar Livro'**
+  String get editBook;
+
+  /// No description provided for @bookTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Título'**
+  String get bookTitle;
+
+  /// No description provided for @author.
+  ///
+  /// In pt, this message translates to:
+  /// **'Autor'**
+  String get author;
+
+  /// No description provided for @releaseYear.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ano de Lançamento'**
+  String get releaseYear;
+
+  /// No description provided for @total.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @totalQuantity.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quantidade Total'**
+  String get totalQuantity;
+
+  /// No description provided for @inUse.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em Uso'**
+  String get inUse;
+
+  /// No description provided for @publisher.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editora'**
+  String get publisher;
+
+  /// No description provided for @invalidBookTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'O título deve ter entre 2 e 150 caracteres'**
+  String get invalidBookTitle;
+
+  /// No description provided for @invalidAuthorLength.
+  ///
+  /// In pt, this message translates to:
+  /// **'O autor deve ter entre 2 e 100 caracteres'**
+  String get invalidAuthorLength;
+
+  /// No description provided for @invalidReleaseYear.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ano mínimo: 1500'**
+  String get invalidReleaseYear;
+
+  /// No description provided for @invalidQuantity.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quantidade inválida'**
+  String get invalidQuantity;
+
+  /// No description provided for @publisherRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selecione uma editora'**
+  String get publisherRequired;
+
+  /// No description provided for @deleteBookConfirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deseja realmente excluir o livro'**
+  String get deleteBookConfirm;
+
+  /// No description provided for @bookCreated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Livro cadastrado com sucesso!'**
+  String get bookCreated;
+
+  /// No description provided for @bookUpdated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Livro atualizado com sucesso!'**
+  String get bookUpdated;
+
+  /// No description provided for @bookDeleted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Livro excluído com sucesso!'**
+  String get bookDeleted;
 }
 
 class _AppLocalizationsDelegate

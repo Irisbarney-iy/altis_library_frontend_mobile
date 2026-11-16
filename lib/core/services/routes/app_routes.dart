@@ -4,6 +4,7 @@ import '../../../modules/auth/presentation/pages/register_page.dart';
 import '../../../modules/auth/presentation/pages/forgot_password_page.dart';
 import '../../../modules/admin/pages/admin_publishers_page.dart';
 import '../../../modules/admin/pages/admin_dashboard_page.dart';
+import '../../../modules/admin/pages/admin_books_page.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -31,11 +32,7 @@ class AppRoutes {
         ),
       ),
       adminPublishers: (context) => const AdminPublishersPage(),
-      adminBooks: (context) => Scaffold(
-        body: Center(
-          child: Text('Tela de gerenciamento de livros')
-        ),
-      ),
+      adminBooks: (context) => AdminBooksPage(),
       adminLoans: (context) => Scaffold(
         body: Center(
           child: Text('Tela de gerenciamento de empréstimos')

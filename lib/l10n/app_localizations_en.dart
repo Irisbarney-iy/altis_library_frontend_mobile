@@ -232,4 +232,62 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publisherDeleted => 'Publisher deleted successfully!';
+
+  @override
+  String get searchBooks => 'Search books...';
+
+  @override
+  String get newBook => 'New Book';
+
+  @override
+  String get editBook => 'Edit Book';
+
+  @override
+  String get bookTitle => 'Title';
+
+  @override
+  String get author => 'Author';
+
+  @override
+  String get releaseYear => 'Release Year';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get totalQuantity => 'Total Quantity';
+
+  @override
+  String get inUse => 'In Use';
+
+  @override
+  String get publisher => 'Publisher';
+
+  @override
+  String get invalidBookTitle => 'Title must be between 2 and 150 characters';
+
+  @override
+  String get invalidAuthorLength =>
+      'Author must be between 2 and 100 characters';
+
+  @override
+  String get invalidReleaseYear => 'Minimum year: 1500';
+
+  @override
+  String get invalidQuantity => 'Invalid quantity';
+
+  @override
+  String get publisherRequired => 'Select a publisher';
+
+  @override
+  String get deleteBookConfirm => 'Are you sure you want to delete book';
+
+  @override
+  String get bookCreated => 'Book created successfully!';
+
+  @override
+  String get bookUpdated => 'Book updated successfully!';
+
+  @override
+  String get bookDeleted => 'Book deleted successfully!';
 }

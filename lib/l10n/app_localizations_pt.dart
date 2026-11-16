@@ -231,4 +231,61 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get publisherDeleted => 'Editora excluída com sucesso!';
+
+  @override
+  String get searchBooks => 'Buscar livros...';
+
+  @override
+  String get newBook => 'Novo Livro';
+
+  @override
+  String get editBook => 'Editar Livro';
+
+  @override
+  String get bookTitle => 'Título';
+
+  @override
+  String get author => 'Autor';
+
+  @override
+  String get releaseYear => 'Ano de Lançamento';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get totalQuantity => 'Quantidade Total';
+
+  @override
+  String get inUse => 'Em Uso';
+
+  @override
+  String get publisher => 'Editora';
+
+  @override
+  String get invalidBookTitle => 'O título deve ter entre 2 e 150 caracteres';
+
+  @override
+  String get invalidAuthorLength => 'O autor deve ter entre 2 e 100 caracteres';
+
+  @override
+  String get invalidReleaseYear => 'Ano mínimo: 1500';
+
+  @override
+  String get invalidQuantity => 'Quantidade inválida';
+
+  @override
+  String get publisherRequired => 'Selecione uma editora';
+
+  @override
+  String get deleteBookConfirm => 'Deseja realmente excluir o livro';
+
+  @override
+  String get bookCreated => 'Livro cadastrado com sucesso!';
+
+  @override
+  String get bookUpdated => 'Livro atualizado com sucesso!';
+
+  @override
+  String get bookDeleted => 'Livro excluído com sucesso!';
 }

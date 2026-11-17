@@ -153,7 +153,7 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               SizedBox(
-                width: 260,
+                width: 240,
                 child: TextField(
                   controller: _searchController,
                   onChanged: (_) => _applyFilters(),
@@ -183,7 +183,7 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
                   _buildSortMenuItem(_UserSortOption.mostRecent, l10n.sortMostRecent),
                 ],
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
@@ -197,8 +197,8 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.tune, size: 18, color: AppColors.primary),
-                      const SizedBox(width: 8),
+                      const Icon(Icons.filter_alt_outlined, size: 18, color: AppColors.primary),
+                      const SizedBox(width: 6),
                       Text(
                         l10n.filter,
                         style: const TextStyle(
@@ -213,47 +213,118 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
             ],
           ),
           const SizedBox(height: 16),
-
           Expanded(
             child: _isLoading
                 ? const Center(
                     child: CircularProgressIndicator(color: AppColors.primary),
                   )
-                : Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.background,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: DataTable(
-                                headingRowColor: WidgetStateProperty.all(AppColors.surface),
-                                dataRowColor: WidgetStateProperty.all(AppColors.background),
-                                dividerThickness: 1,
-                                columns: [
-                                  DataColumn(label: _headerText(l10n.fullName)),
-                                  DataColumn(label: _headerText(l10n.email)),
-                                  DataColumn(label: _headerText(l10n.phone)),
-                                  DataColumn(label: _headerText(l10n.status)),
-                                  DataColumn(label: _headerText(l10n.actions)),
-                                ],
-                                rows: pageItems.map((user) {
-                                  final isToggling = _togglingUserIds.contains(user.id);
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          itemCount: pageItems.length,
+                          separatorBuilder: (_, __) => const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            final user = pageItems[index];
+                            final isToggling = _togglingUserIds.contains(user.id);
+                            final initial = user.name.trim().isNotEmpty
+                                ? user.name.trim()[0].toUpperCase()
+                                : '?';
 
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(_cellText(user.name, isBold: true)),
-                                      DataCell(_cellText(user.email)),
-                                      DataCell(_cellText(user.phone ?? '---')),
-                                      DataCell(_buildStatusBadge(user.active, l10n)),
-                                      DataCell(
-                                        Switch(
+                            return Container(
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: AppColors.border),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 18,
+                                        backgroundColor: AppColors.surface,
+                                        child: Text(
+                                          initial,
+                                          style: const TextStyle(
+                                            color: AppColors.primary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: Text(
+                                          user.name,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            color: AppColors.textPrimary,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      _buildStatusBadge(user.active, l10n),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.email_outlined,
+                                        size: 16,
+                                        color: AppColors.primary,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        child: Text(
+                                          user.email,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            color: AppColors.primary,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.phone_outlined,
+                                        size: 16,
+                                        color: AppColors.primary,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        user.phone ?? '---',
+                                        style: const TextStyle(
+                                          color: AppColors.primary,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(color: AppColors.border, height: 18),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        l10n.status,
+                                        style: const TextStyle(
+                                          color: AppColors.textPrimary,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                        child: Switch(
                                           value: user.active,
                                           activeThumbColor: Colors.white,
                                           activeTrackColor: const Color(0xFF1976D2),
@@ -263,73 +334,85 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
                                         ),
                                       ),
                                     ],
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                          decoration: const BoxDecoration(
-                            color: AppColors.surface,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                totalItems == 0
-                                    ? '0 items'
-                                    : '${startIndex + 1} - $endIndex / $totalItems',
-                                style: const TextStyle(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.chevron_left),
-                                    color: AppColors.primary,
-                                    onPressed: _currentPage > 1
-                                        ? () => setState(() => _currentPage--)
-                                        : null,
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.primary,
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    child: Text(
-                                      '$_currentPage / $totalPages',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.chevron_right),
-                                    color: AppColors.primary,
-                                    onPressed: _currentPage < totalPages
-                                        ? () => setState(() => _currentPage++)
-                                        : null,
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            );
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                      _buildPaginationFooter(
+                        totalItems: totalItems,
+                        startIndex: startIndex,
+                        endIndex: endIndex,
+                        totalPages: totalPages,
+                      ),
+                    ],
                   ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPaginationFooter({
+    required int totalItems,
+    required int startIndex,
+    required int endIndex,
+    required int totalPages,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            totalItems == 0
+                ? '0 items'
+                : '${startIndex + 1} - $endIndex / $totalItems',
+            style: const TextStyle(
+              color: AppColors.primary,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+          ),
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.chevron_left),
+                color: AppColors.primary,
+                onPressed: _currentPage > 1
+                    ? () => setState(() => _currentPage--)
+                    : null,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  '$_currentPage / $totalPages',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.chevron_right),
+                color: AppColors.primary,
+                onPressed: _currentPage < totalPages
+                    ? () => setState(() => _currentPage++)
+                    : null,
+              ),
+            ],
           ),
         ],
       ),
@@ -359,7 +442,7 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
 
   Widget _buildStatusBadge(bool isActive, AppLocalizations l10n) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
         color: isActive ? const Color(0xFFD5F5E3) : const Color(0xFFFADBD8),
         borderRadius: BorderRadius.circular(20),
@@ -371,26 +454,6 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
           fontWeight: FontWeight.bold,
           fontSize: 12,
         ),
-      ),
-    );
-  }
-
-  Widget _headerText(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        color: AppColors.textPrimary,
-      ),
-    );
-  }
-
-  Widget _cellText(String text, {bool isBold = false}) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: AppColors.primary,
-        fontWeight: isBold ? FontWeight.w600 : FontWeight.normal,
       ),
     );
   }

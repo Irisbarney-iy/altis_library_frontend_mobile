@@ -123,5 +123,15 @@
   "loanStatusOnTime": "A Tiempo",
   "loanStatusOverdue": "Atrasado",
   "loanStatusRtdOnTime": "Entr.AT",
-  "loanStatusRtdDelayed": "Entr.CR"
+  "loanStatusRtdDelayed": "Entr.CR",
+  "totalBooksMetric": "Total de Libros",
+  "activeLoansMetric": "Préstamos Activos",
+  "monthlyLoansMetric": "Préstamos del Mes",
+  "criticalDelayAlerts": "Alertas Críticas de Retraso",
+  "noCriticalDelays": "No hay préstamos con retraso crítico por el momento.",
+  "userColumn": "Usuario",
+  "daysOverdueColumn": "Días de Retraso",
+  "daySingular": "día",
+  "daysPlural": "días",
+  "tryAgain": "Intentar de nuevo"
 }

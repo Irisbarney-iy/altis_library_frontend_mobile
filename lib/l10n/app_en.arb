@@ -123,5 +123,15 @@
   "loanStatusOnTime": "On Time",
   "loanStatusOverdue": "Overdue",
   "loanStatusRtdOnTime": "Rtd.OnTime",
-  "loanStatusRtdDelayed": "Rtd.Delayed"
+  "loanStatusRtdDelayed": "Rtd.Delayed",
+  "totalBooksMetric": "Total Books",
+  "activeLoansMetric": "Active Loans",
+  "monthlyLoansMetric": "Monthly Loans",
+  "criticalDelayAlerts": "Critical Delay Alerts",
+  "noCriticalDelays": "No critical overdue loans at the moment.",
+  "userColumn": "User",
+  "daysOverdueColumn": "Days Overdue",
+  "daySingular": "day",
+  "daysPlural": "days",
+  "tryAgain": "Try again"
 }

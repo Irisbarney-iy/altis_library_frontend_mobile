@@ -843,6 +843,66 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Entre.CA'**
   String get loanStatusRtdDelayed;
+
+  /// No description provided for @totalBooksMetric.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total de Livros'**
+  String get totalBooksMetric;
+
+  /// No description provided for @activeLoansMetric.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimos Ativos'**
+  String get activeLoansMetric;
+
+  /// No description provided for @monthlyLoansMetric.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimos ao Mês'**
+  String get monthlyLoansMetric;
+
+  /// No description provided for @criticalDelayAlerts.
+  ///
+  /// In pt, this message translates to:
+  /// **'Alertas Críticos de Atraso'**
+  String get criticalDelayAlerts;
+
+  /// No description provided for @noCriticalDelays.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum empréstimo com atraso crítico no momento.'**
+  String get noCriticalDelays;
+
+  /// No description provided for @userColumn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usuário'**
+  String get userColumn;
+
+  /// No description provided for @daysOverdueColumn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dias de Atraso'**
+  String get daysOverdueColumn;
+
+  /// No description provided for @daySingular.
+  ///
+  /// In pt, this message translates to:
+  /// **'dia'**
+  String get daySingular;
+
+  /// No description provided for @daysPlural.
+  ///
+  /// In pt, this message translates to:
+  /// **'dias'**
+  String get daysPlural;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tentar novamente'**
+  String get tryAgain;
 }
 
 class _AppLocalizationsDelegate

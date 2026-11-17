@@ -123,5 +123,15 @@
   "loanStatusOnTime": "No Prazo",
   "loanStatusOverdue": "Atrasado",
   "loanStatusRtdOnTime": "Entre.NP",
-  "loanStatusRtdDelayed": "Entre.CA"
+  "loanStatusRtdDelayed": "Entre.CA",
+  "totalBooksMetric": "Total de Livros",
+  "activeLoansMetric": "Empréstimos Ativos",
+  "monthlyLoansMetric": "Empréstimos ao Mês",
+  "criticalDelayAlerts": "Alertas Críticos de Atraso",
+  "noCriticalDelays": "Nenhum empréstimo com atraso crítico no momento.",
+  "userColumn": "Usuário",
+  "daysOverdueColumn": "Dias de Atraso",
+  "daySingular": "dia",
+  "daysPlural": "dias",
+  "tryAgain": "Tentar novamente"
 }

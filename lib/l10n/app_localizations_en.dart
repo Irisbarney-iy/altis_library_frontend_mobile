@@ -389,4 +389,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loanStatusRtdDelayed => 'Rtd.Delayed';
+
+  @override
+  String get totalBooksMetric => 'Total Books';
+
+  @override
+  String get activeLoansMetric => 'Active Loans';
+
+  @override
+  String get monthlyLoansMetric => 'Monthly Loans';
+
+  @override
+  String get criticalDelayAlerts => 'Critical Delay Alerts';
+
+  @override
+  String get noCriticalDelays => 'No critical overdue loans at the moment.';
+
+  @override
+  String get userColumn => 'User';
+
+  @override
+  String get daysOverdueColumn => 'Days Overdue';
+
+  @override
+  String get daySingular => 'day';
+
+  @override
+  String get daysPlural => 'days';
+
+  @override
+  String get tryAgain => 'Try again';
 }

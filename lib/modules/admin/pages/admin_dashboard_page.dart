@@ -208,152 +208,104 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
               ),
             )
           else
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: MediaQuery.of(context).size.width - 66,
-                ),
-                child: Container(
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: delays.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 8),
+              itemBuilder: (context, index) {
+                final item = delays[index];
+                final daysText = item.daysOverdue == 1
+                    ? '1 ${l10n.daySingular}'
+                    : '${item.daysOverdue} ${l10n.daysPlural}';
+
+                return Container(
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: AppColors.border, width: 1.2),
+                    border: Border.all(color: AppColors.border),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(7),
-                    child: Column(
-                      children: [
-                        // Cabecalho da tabela
-                        Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 28,
+                        height: 28,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
                           color: AppColors.surface,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 12,
-                          ),
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 48,
-                                child: Text(
-                                  'id',
-                                  style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 170,
-                                child: Text(
-                                  l10n.userColumn,
-                                  style: const TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 210,
-                                child: Text(
-                                  l10n.book,
-                                  style: const TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 120,
-                                child: Text(
-                                  l10n.daysOverdueColumn,
-                                  textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                            ],
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          '${index + 1}',
+                          style: const TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
                           ),
                         ),
-                        // Linhas de atrasos criticos
-                        ...List.generate(delays.length, (index) {
-                          final item = delays[index];
-                          final daysText = item.daysOverdue == 1
-                              ? '1 ${l10n.daySingular}'
-                              : '${item.daysOverdue} ${l10n.daysPlural}';
-
-                          return Container(
-                            decoration: const BoxDecoration(
-                              color: AppColors.background,
-                              border: Border(
-                                top: BorderSide(color: AppColors.border),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.bookTitle,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: AppColors.textPrimary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
                               ),
                             ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 12,
-                            ),
-                            child: Row(
+                            const SizedBox(height: 2),
+                            Row(
                               children: [
-                                SizedBox(
-                                  width: 48,
-                                  child: Text(
-                                    '${index + 1}',
-                                    style: const TextStyle(
-                                      color: AppColors.primary,
-                                      fontSize: 13,
-                                    ),
-                                  ),
+                                const Icon(
+                                  Icons.person_outline,
+                                  size: 14,
+                                  color: AppColors.primary,
                                 ),
-                                SizedBox(
-                                  width: 170,
+                                const SizedBox(width: 4),
+                                Expanded(
                                   child: Text(
                                     item.userName,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
                                       color: AppColors.primary,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 210,
-                                  child: Text(
-                                    item.bookTitle,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      color: AppColors.primary,
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 120,
-                                  child: Text(
-                                    daysText,
-                                    textAlign: TextAlign.right,
-                                    style: const TextStyle(
-                                      color: AppColors.error,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
+                                      fontSize: 12,
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                          );
-                        }),
-                      ],
-                    ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFADBD8),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          daysText,
+                          style: const TextStyle(
+                            color: AppColors.error,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ),
+                );
+              },
             ),
         ],
       ),
@@ -377,7 +329,7 @@ class _MetricCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.border),
       ),

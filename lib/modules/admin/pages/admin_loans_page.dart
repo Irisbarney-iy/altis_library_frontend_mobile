@@ -510,7 +510,12 @@ class _AdminLoansPageState extends State<AdminLoansPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: AppColors.border),
+                    border: Border.all(
+                      color: _sortOption != _LoanSortOption.mostRecent
+                          ? AppColors.primary
+                          : AppColors.border,
+                      width: _sortOption != _LoanSortOption.mostRecent ? 1.5 : 1,
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -556,163 +561,291 @@ class _AdminLoansPageState extends State<AdminLoansPage> {
                 ? const Center(
                     child: CircularProgressIndicator(color: AppColors.primary),
                   )
-                : Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.background,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: DataTable(
-                                headingRowColor: WidgetStateProperty.all(AppColors.surface),
-                                dataRowColor: WidgetStateProperty.all(AppColors.background),
-                                dividerThickness: 1,
-                                columns: [
-                                  DataColumn(label: _headerText(l10n.renter)),
-                                  DataColumn(label: _headerText(l10n.book)),
-                                  DataColumn(label: _headerText(l10n.rentalDate)),
-                                  DataColumn(label: _headerText(l10n.limitDate)),
-                                  DataColumn(label: _headerText(l10n.returnedDate)),
-                                  DataColumn(label: _headerText(l10n.status)),
-                                  DataColumn(label: _headerText(l10n.actions)),
-                                ],
-                                rows: pageItems.map((loan) {
-                                  final disabled = loan.isReturned;
-                                  final borderColor =
-                                      disabled ? AppColors.border : AppColors.primary;
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          itemCount: pageItems.length,
+                          separatorBuilder: (_, __) => const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            final loan = pageItems[index];
+                            final disabled = loan.isReturned;
+                            final actionColor =
+                                disabled ? AppColors.border : AppColors.primary;
 
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(_cellText(loan.userName, isBold: true)),
-                                      DataCell(_cellText(loan.bookTitle)),
-                                      DataCell(_cellText(LoanModel.formatDisplayDate(loan.loanDate))),
-                                      DataCell(_cellText(LoanModel.formatDisplayDate(loan.limitTerm))),
-                                      DataCell(_cellText(LoanModel.formatDisplayDate(loan.returnDate))),
-                                      DataCell(_buildStatusBadge(loan.status, l10n)),
-                                      DataCell(
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            InkWell(
-                                              onTap: disabled
-                                                  ? null
-                                                  : () => _openRenewDialog(loan),
-                                              borderRadius: BorderRadius.circular(6),
-                                              child: Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 6,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(color: borderColor),
-                                                  borderRadius: BorderRadius.circular(6),
-                                                ),
-                                                child: Text(
-                                                  l10n.renew,
-                                                  style: TextStyle(
-                                                    color: borderColor,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(width: 6),
-                                            InkWell(
-                                              onTap: disabled
-                                                  ? null
-                                                  : () => _confirmReturn(loan),
-                                              borderRadius: BorderRadius.circular(6),
-                                              child: Container(
-                                                padding: const EdgeInsets.all(6),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(color: borderColor),
-                                                  borderRadius: BorderRadius.circular(6),
-                                                ),
-                                                child: Icon(
-                                                  Icons.download_rounded,
-                                                  size: 18,
-                                                  color: borderColor,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                            return Container(
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: AppColors.border),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(
+                                        Icons.menu_book_rounded,
+                                        color: AppColors.primary,
+                                        size: 20,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          loan.bookTitle,
+                                          style: const TextStyle(
+                                            color: AppColors.textPrimary,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      _buildStatusBadge(loan.status, l10n),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.person_outline,
+                                        color: AppColors.primary,
+                                        size: 16,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        child: Text(
+                                          loan.userName,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            color: AppColors.primary,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 13,
+                                          ),
                                         ),
                                       ),
                                     ],
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                          decoration: const BoxDecoration(
-                            color: AppColors.surface,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                totalItems == 0
-                                    ? '0 items'
-                                    : '${startIndex + 1} - $endIndex / $totalItems',
-                                style: const TextStyle(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.chevron_left),
-                                    color: AppColors.primary,
-                                    onPressed: _currentPage > 1
-                                        ? () => setState(() => _currentPage--)
-                                        : null,
                                   ),
+                                  const SizedBox(height: 10),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.primary,
-                                      borderRadius: BorderRadius.circular(4),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 8,
                                     ),
-                                    child: Text(
-                                      '$_currentPage / $totalPages',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      ),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.surface.withValues(alpha: 0.45),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: _buildDateColumn(
+                                            l10n.rentalDate,
+                                            LoanModel.formatDisplayDate(loan.loanDate),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: _buildDateColumn(
+                                            l10n.limitDate,
+                                            LoanModel.formatDisplayDate(loan.limitTerm),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: _buildDateColumn(
+                                            l10n.returnedDate,
+                                            LoanModel.formatDisplayDate(loan.returnDate),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.chevron_right),
-                                    color: AppColors.primary,
-                                    onPressed: _currentPage < totalPages
-                                        ? () => setState(() => _currentPage++)
-                                        : null,
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: disabled
+                                              ? null
+                                              : () => _openRenewDialog(loan),
+                                          borderRadius: BorderRadius.circular(8),
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 8),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: actionColor),
+                                              borderRadius: BorderRadius.circular(8),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.update_rounded,
+                                                  size: 16,
+                                                  color: actionColor,
+                                                ),
+                                                const SizedBox(width: 6),
+                                                Text(
+                                                  l10n.renew,
+                                                  style: TextStyle(
+                                                    color: actionColor,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: disabled
+                                              ? null
+                                              : () => _confirmReturn(loan),
+                                          borderRadius: BorderRadius.circular(8),
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 8),
+                                            decoration: BoxDecoration(
+                                              color: disabled
+                                                  ? Colors.transparent
+                                                  : AppColors.primary,
+                                              border: Border.all(color: actionColor),
+                                              borderRadius: BorderRadius.circular(8),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.assignment_turned_in_outlined,
+                                                  size: 16,
+                                                  color: disabled
+                                                      ? actionColor
+                                                      : Colors.white,
+                                                ),
+                                                const SizedBox(width: 6),
+                                                Text(
+                                                  l10n.returnBook,
+                                                  style: TextStyle(
+                                                    color: disabled
+                                                        ? actionColor
+                                                        : Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            );
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                      _buildPaginationFooter(
+                        totalItems: totalItems,
+                        startIndex: startIndex,
+                        endIndex: endIndex,
+                        totalPages: totalPages,
+                      ),
+                    ],
                   ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDateColumn(String label, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.primary,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPaginationFooter({
+    required int totalItems,
+    required int startIndex,
+    required int endIndex,
+    required int totalPages,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            totalItems == 0
+                ? '0 items'
+                : '${startIndex + 1} - $endIndex / $totalItems',
+            style: const TextStyle(
+              color: AppColors.primary,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+          ),
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.chevron_left),
+                color: AppColors.primary,
+                onPressed: _currentPage > 1
+                    ? () => setState(() => _currentPage--)
+                    : null,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  '$_currentPage / $totalPages',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.chevron_right),
+                color: AppColors.primary,
+                onPressed: _currentPage < totalPages
+                    ? () => setState(() => _currentPage++)
+                    : null,
+              ),
+            ],
           ),
         ],
       ),
@@ -769,7 +902,7 @@ class _AdminLoansPageState extends State<AdminLoansPage> {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(20),
@@ -779,28 +912,8 @@ class _AdminLoansPageState extends State<AdminLoansPage> {
         style: TextStyle(
           color: textColor,
           fontWeight: FontWeight.bold,
-          fontSize: 12,
+          fontSize: 11,
         ),
-      ),
-    );
-  }
-
-  Widget _headerText(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        color: AppColors.textPrimary,
-      ),
-    );
-  }
-
-  Widget _cellText(String text, {bool isBold = false}) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: AppColors.primary,
-        fontWeight: isBold ? FontWeight.w600 : FontWeight.normal,
       ),
     );
   }

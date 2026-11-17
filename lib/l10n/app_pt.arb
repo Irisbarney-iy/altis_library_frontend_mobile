@@ -110,6 +110,7 @@
   "limitDate": "Prazo",
   "returnedDate": "Entrega",
   "renew": "Renovar",
+  "returnBook": "Devolver",
   "renewLoanTitle": "Renovar Empréstimo",
   "newLimitDate": "Novo Prazo Limite",
   "returnBookTitle": "Confirmar Devolução",

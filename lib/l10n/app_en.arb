@@ -110,6 +110,7 @@
   "limitDate": "Limit Date",
   "returnedDate": "Returned Date",
   "renew": "Renew",
+  "returnBook": "Return",
   "renewLoanTitle": "Renew Loan",
   "newLimitDate": "New Limit Date",
   "returnBookTitle": "Confirm Return",

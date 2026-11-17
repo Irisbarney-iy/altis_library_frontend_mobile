@@ -347,6 +347,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get renew => 'Renovar';
 
   @override
+  String get returnBook => 'Devolver';
+
+  @override
   String get renewLoanTitle => 'Renovar Empréstimo';
 
   @override

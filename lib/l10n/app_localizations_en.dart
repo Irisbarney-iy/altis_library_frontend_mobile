@@ -349,6 +349,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get renew => 'Renew';
 
   @override
+  String get returnBook => 'Return';
+
+  @override
   String get renewLoanTitle => 'Renew Loan';
 
   @override

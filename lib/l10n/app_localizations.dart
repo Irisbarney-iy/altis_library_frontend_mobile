@@ -760,6 +760,12 @@ abstract class AppLocalizations {
   /// **'Renovar'**
   String get renew;
 
+  /// No description provided for @returnBook.
+  ///
+  /// In pt, this message translates to:
+  /// **'Devolver'**
+  String get returnBook;
+
   /// No description provided for @renewLoanTitle.
   ///
   /// In pt, this message translates to:

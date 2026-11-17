@@ -5,9 +5,11 @@ import '../../../core/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import '../models/book_model.dart';
 import '../models/publisher_model.dart';
-import '../../admin/services/book_service.dart';
-import '../../admin/services/publisher_service.dart';
+import '../services/book_service.dart';
+import '../services/publisher_service.dart';
 import '../widgets/admin_scaffold.dart';
+
+enum _BookSortOption { aToZ, zToA, mostRecent }
 
 class AdminBooksPage extends StatefulWidget {
   const AdminBooksPage({super.key});
@@ -25,6 +27,7 @@ class _AdminBooksPageState extends State<AdminBooksPage> {
   List<BookModel> _filteredBooks = [];
   List<PublisherModel> _publishers = [];
   bool _isLoading = true;
+  _BookSortOption _sortOption = _BookSortOption.aToZ;
 
   int _currentPage = 1;
   static const int _itemsPerPage = 9;
@@ -53,7 +56,7 @@ class _AdminBooksPageState extends State<AdminBooksPage> {
       setState(() {
         _allBooks = results[0] as List<BookModel>;
         _publishers = results[1] as List<PublisherModel>;
-        _applySearch(_searchController.text);
+        _applyFilters();
       });
     } catch (e) {
       if (!mounted) return;
@@ -63,20 +66,33 @@ class _AdminBooksPageState extends State<AdminBooksPage> {
     }
   }
 
-  void _applySearch(String query) {
-    final q = query.trim().toLowerCase();
+  void _applyFilters() {
+    final q = _searchController.text.trim().toLowerCase();
+
+    final result = q.isEmpty
+        ? List<BookModel>.from(_allBooks)
+        : _allBooks.where((b) {
+            return b.title.toLowerCase().contains(q) ||
+                b.author.toLowerCase().contains(q) ||
+                b.publisherName.toLowerCase().contains(q) ||
+                b.releaseYear.toString().contains(q);
+          }).toList();
+
+    switch (_sortOption) {
+      case _BookSortOption.aToZ:
+        result.sort((a, b) => a.title.toLowerCase().compareTo(b.title.toLowerCase()));
+        break;
+      case _BookSortOption.zToA:
+        result.sort((a, b) => b.title.toLowerCase().compareTo(a.title.toLowerCase()));
+        break;
+      case _BookSortOption.mostRecent:
+        result.sort((a, b) => (b.id ?? 0).compareTo(a.id ?? 0));
+        break;
+    }
+
     setState(() {
       _currentPage = 1;
-      if (q.isEmpty) {
-        _filteredBooks = List.from(_allBooks);
-      } else {
-        _filteredBooks = _allBooks.where((b) {
-          return b.title.toLowerCase().contains(q) ||
-              b.author.toLowerCase().contains(q) ||
-              b.publisherName.toLowerCase().contains(q) ||
-              b.releaseYear.toString().contains(q);
-        }).toList();
-      }
+      _filteredBooks = result;
     });
   }
 
@@ -193,7 +209,9 @@ class _AdminBooksPageState extends State<AdminBooksPage> {
                               ),
                               validator: (v) {
                                 final qty = int.tryParse(v ?? '');
-                                if (qty == null || (!isEditing && qty <= 0) || (isEditing && qty < 0)) {
+                                if (qty == null ||
+                                    (!isEditing && qty <= 0) ||
+                                    (isEditing && qty < 0)) {
                                   return l10n.invalidQuantity;
                                 }
                                 return null;
@@ -364,10 +382,10 @@ class _AdminBooksPageState extends State<AdminBooksPage> {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               SizedBox(
-                width: 260,
+                width: 240,
                 child: TextField(
                   controller: _searchController,
-                  onChanged: _applySearch,
+                  onChanged: (_) => _applyFilters(),
                   decoration: InputDecoration(
                     hintText: l10n.searchBooks,
                     prefixIcon: const Icon(Icons.search, color: AppColors.primary),
@@ -378,6 +396,46 @@ class _AdminBooksPageState extends State<AdminBooksPage> {
                       borderRadius: BorderRadius.circular(8),
                       borderSide: const BorderSide(color: AppColors.border),
                     ),
+                  ),
+                ),
+              ),
+              PopupMenuButton<_BookSortOption>(
+                initialValue: _sortOption,
+                color: AppColors.background,
+                onSelected: (selected) {
+                  _sortOption = selected;
+                  _applyFilters();
+                },
+                itemBuilder: (context) => [
+                  _buildSortMenuItem(_BookSortOption.aToZ, l10n.sortAZ),
+                  _buildSortMenuItem(_BookSortOption.zToA, l10n.sortZA),
+                  _buildSortMenuItem(_BookSortOption.mostRecent, l10n.sortMostRecent),
+                ],
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: _sortOption != _BookSortOption.aToZ
+                          ? AppColors.primary
+                          : AppColors.border,
+                      width: _sortOption != _BookSortOption.aToZ ? 1.5 : 1,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.filter_alt_outlined, size: 18, color: AppColors.primary),
+                      const SizedBox(width: 6),
+                      Text(
+                        l10n.filter,
+                        style: const TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -400,124 +458,219 @@ class _AdminBooksPageState extends State<AdminBooksPage> {
                 ? const Center(
                     child: CircularProgressIndicator(color: AppColors.primary),
                   )
-                : Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.background,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: DataTable(
-                                headingRowColor: WidgetStateProperty.all(AppColors.surface),
-                                dataRowColor: WidgetStateProperty.all(AppColors.background),
-                                dividerThickness: 1,
-                                columns: [
-                                  DataColumn(label: _headerText(l10n.bookTitle)),
-                                  DataColumn(label: _headerText(l10n.author)),
-                                  DataColumn(label: _headerText(l10n.releaseYear)),
-                                  DataColumn(label: _headerText(l10n.total)),
-                                  DataColumn(label: _headerText(l10n.inUse)),
-                                  DataColumn(label: _headerText(l10n.publisher)),
-                                  DataColumn(label: _headerText(l10n.actions)),
-                                ],
-                                rows: pageItems.map((book) {
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(_cellText(book.title, isBold: true)),
-                                      DataCell(_cellText(book.author)),
-                                      DataCell(_cellText(book.releaseYear.toString())),
-                                      DataCell(_cellText(book.totalQuantity.toString())),
-                                      DataCell(_cellText(book.inUseQuantity.toString())),
-                                      DataCell(_cellText(book.publisherName)),
-                                      DataCell(
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            _actionIconButton(
-                                              icon: Icons.edit_outlined,
-                                              onTap: () => _openBookFormDialog(book: book),
-                                            ),
-                                            const SizedBox(width: 8),
-                                            _actionIconButton(
-                                              icon: Icons.delete_outline,
-                                              onTap: () => _confirmDelete(book),
-                                            ),
-                                          ],
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          itemCount: pageItems.length,
+                          separatorBuilder: (_, __) => const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            final book = pageItems[index];
+
+                            return Container(
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: AppColors.border),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(
+                                        Icons.menu_book_rounded,
+                                        color: AppColors.primary,
+                                        size: 20,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          book.title,
+                                          style: const TextStyle(
+                                            color: AppColors.textPrimary,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.surface,
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: Text(
+                                          book.releaseYear.toString(),
+                                          style: const TextStyle(
+                                            color: AppColors.primary,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
+                                          ),
                                         ),
                                       ),
                                     ],
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                          decoration: const BoxDecoration(
-                            color: AppColors.surface,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                totalItems == 0
-                                    ? '0 items'
-                                    : '${startIndex + 1} - $endIndex / $totalItems',
-                                style: const TextStyle(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.chevron_left),
-                                    color: AppColors.primary,
-                                    onPressed: _currentPage > 1
-                                        ? () => setState(() => _currentPage--)
-                                        : null,
                                   ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.primary,
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    child: Text(
-                                      '$_currentPage / $totalPages',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.person_outline,
+                                        size: 16,
+                                        color: AppColors.primary,
                                       ),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        child: Text(
+                                          book.author,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            color: AppColors.primary,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.business_outlined,
+                                        size: 16,
+                                        color: AppColors.primary,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        child: Text(
+                                          book.publisherName,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            color: AppColors.primary,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.surface.withValues(alpha: 0.45),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: _buildStatItem(
+                                            l10n.total,
+                                            book.totalQuantity.toString(),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: _buildStatItem(
+                                            l10n.inUse,
+                                            book.inUseQuantity.toString(),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.chevron_right),
-                                    color: AppColors.primary,
-                                    onPressed: _currentPage < totalPages
-                                        ? () => setState(() => _currentPage++)
-                                        : null,
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () => _openBookFormDialog(book: book),
+                                          borderRadius: BorderRadius.circular(8),
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 8),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: AppColors.primary),
+                                              borderRadius: BorderRadius.circular(8),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                const Icon(
+                                                  Icons.edit_outlined,
+                                                  size: 16,
+                                                  color: AppColors.primary,
+                                                ),
+                                                const SizedBox(width: 6),
+                                                Text(
+                                                  l10n.editBook,
+                                                  style: const TextStyle(
+                                                    color: AppColors.primary,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () => _confirmDelete(book),
+                                          borderRadius: BorderRadius.circular(8),
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 8),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: AppColors.error),
+                                              borderRadius: BorderRadius.circular(8),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                const Icon(
+                                                  Icons.delete_outline,
+                                                  size: 16,
+                                                  color: AppColors.error,
+                                                ),
+                                                const SizedBox(width: 6),
+                                                Text(
+                                                  l10n.delete,
+                                                  style: const TextStyle(
+                                                    color: AppColors.error,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            );
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                      _buildPaginationFooter(
+                        totalItems: totalItems,
+                        startIndex: startIndex,
+                        endIndex: endIndex,
+                        totalPages: totalPages,
+                      ),
+                    ],
                   ),
           ),
         ],
@@ -525,37 +678,110 @@ class _AdminBooksPageState extends State<AdminBooksPage> {
     );
   }
 
-  Widget _headerText(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        color: AppColors.textPrimary,
-      ),
-    );
-  }
-
-  Widget _cellText(String text, {bool isBold = false}) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: AppColors.primary,
-        fontWeight: isBold ? FontWeight.w600 : FontWeight.normal,
-      ),
-    );
-  }
-
-  Widget _actionIconButton({required IconData icon, required VoidCallback onTap}) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(6),
-      child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.primary),
-          borderRadius: BorderRadius.circular(6),
+  Widget _buildStatItem(String label, String value) {
+    return Row(
+      children: [
+        Text(
+          '$label: ',
+          style: const TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        child: Icon(icon, size: 18, color: AppColors.primary),
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.primary,
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPaginationFooter({
+    required int totalItems,
+    required int startIndex,
+    required int endIndex,
+    required int totalPages,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            totalItems == 0
+                ? '0 items'
+                : '${startIndex + 1} - $endIndex / $totalItems',
+            style: const TextStyle(
+              color: AppColors.primary,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+          ),
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.chevron_left),
+                color: AppColors.primary,
+                onPressed: _currentPage > 1
+                    ? () => setState(() => _currentPage--)
+                    : null,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  '$_currentPage / $totalPages',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.chevron_right),
+                color: AppColors.primary,
+                onPressed: _currentPage < totalPages
+                    ? () => setState(() => _currentPage++)
+                    : null,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  PopupMenuItem<_BookSortOption> _buildSortMenuItem(_BookSortOption value, String label) {
+    final isSelected = _sortOption == value;
+    return PopupMenuItem<_BookSortOption>(
+      value: value,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? AppColors.primary : AppColors.textPrimary,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+          if (isSelected)
+            const Icon(Icons.check, size: 18, color: AppColors.primary),
+        ],
       ),
     );
   }

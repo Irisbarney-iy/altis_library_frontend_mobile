@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../core/services/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/preferences_dialog.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../auth/service/auth_service.dart';
 
@@ -35,23 +36,34 @@ class UserScaffold extends StatelessWidget {
         foregroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            const Icon(Icons.menu_book_rounded, color: Colors.white, size: 26),
-            const SizedBox(width: 10),
-            Text(
-              l10n.appName,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ],
+        title: InkWell(
+          onTap: () {
+            if (currentRoute != AppRoutes.userDashboard) {
+              Navigator.pushReplacementNamed(context, AppRoutes.userDashboard);
+            }
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.menu_book_rounded, color: Colors.white, size: 26),
+              const SizedBox(width: 10),
+              Text(
+                l10n.appName,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ],
+          ),
         ),
         actions: [
           PopupMenuButton<String>(
-            offset: const Offset(0, 48),
-            color: AppColors.background,
+            offset: const Offset(0, 52),
+            color: AppColors.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
             onSelected: (value) {
-              if (value == 'dashboard' && currentRoute != AppRoutes.userDashboard) {
-                Navigator.pushReplacementNamed(context, AppRoutes.userDashboard);
+              if (value == 'preferences') {
+                showPreferencesDialog(context);
               } else if (value == 'profile' && currentRoute != AppRoutes.userProfile) {
                 Navigator.pushReplacementNamed(context, AppRoutes.userProfile);
               } else if (value == 'logout') {
@@ -60,53 +72,42 @@ class UserScaffold extends StatelessWidget {
             },
             itemBuilder: (context) => [
               PopupMenuItem(
-                value: 'dashboard',
-                child: Row(
-                  children: [
-                    const Icon(Icons.dashboard_outlined, color: AppColors.primary, size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      l10n.menuDashboard,
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: currentRoute == AppRoutes.userDashboard
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                      ),
+                value: 'preferences',
+                child: Center(
+                  child: Text(
+                    l10n.preferences,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
                     ),
-                  ],
+                  ),
                 ),
               ),
               PopupMenuItem(
                 value: 'profile',
-                child: Row(
-                  children: [
-                    const Icon(Icons.person_outline, color: AppColors.primary, size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      l10n.menuProfile,
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: currentRoute == AppRoutes.userProfile
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                      ),
+                child: Center(
+                  child: Text(
+                    l10n.viewProfile,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
                     ),
-                  ],
+                  ),
                 ),
               ),
-              const PopupMenuDivider(),
               PopupMenuItem(
                 value: 'logout',
-                child: Row(
-                  children: [
-                    const Icon(Icons.logout, color: AppColors.error, size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      l10n.logout,
-                      style: const TextStyle(color: AppColors.error),
+                child: Center(
+                  child: Text(
+                    l10n.logout,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],

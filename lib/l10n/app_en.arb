@@ -142,5 +142,12 @@
   "withdrawalsMetric": "Returned",
   "myBooksSection": "My books",
   "noBorrowedBooks": "You currently have no borrowed books.",
-  "dueDateColumn": "Due Date"
+  "dueDateColumn": "Due Date",
+  "preferences": "Preferences",
+  "selectLanguage": "Select the application language:",
+  "viewProfile": "View Profile",
+  "editProfile": "Edit Profile",
+  "profileUpdated": "Profile updated successfully!",
+  "emailChangedRelogin": "Email updated! Please log in again to continue.",
+  "invalidAddressLength": "Address must be at most 255 characters."
 }

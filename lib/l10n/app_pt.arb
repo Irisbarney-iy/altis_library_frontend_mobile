@@ -142,5 +142,12 @@
   "withdrawalsMetric": "Retiradas",
   "myBooksSection": "Meus livros",
   "noBorrowedBooks": "Você não possui livros emprestados no momento.",
-  "dueDateColumn": "Prazo"
+  "dueDateColumn": "Prazo",
+  "preferences": "Preferências",
+  "selectLanguage": "Selecione o idioma do aplicativo:",
+  "viewProfile": "Visualizar Perfil",
+  "editProfile": "Editar Perfil",
+  "profileUpdated": "Perfil atualizado com sucesso!",
+  "emailChangedRelogin": "E-mail alterado! Faça login novamente para continuar.",
+  "invalidAddressLength": "O endereço deve ter no máximo 255 caracteres."
 }

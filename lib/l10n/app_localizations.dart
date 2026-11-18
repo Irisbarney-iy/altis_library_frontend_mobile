@@ -957,6 +957,48 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Prazo'**
   String get dueDateColumn;
+
+  /// No description provided for @preferences.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preferências'**
+  String get preferences;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selecione o idioma do aplicativo:'**
+  String get selectLanguage;
+
+  /// No description provided for @viewProfile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Visualizar Perfil'**
+  String get viewProfile;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar Perfil'**
+  String get editProfile;
+
+  /// No description provided for @profileUpdated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil atualizado com sucesso!'**
+  String get profileUpdated;
+
+  /// No description provided for @emailChangedRelogin.
+  ///
+  /// In pt, this message translates to:
+  /// **'E-mail alterado! Faça login novamente para continuar.'**
+  String get emailChangedRelogin;
+
+  /// No description provided for @invalidAddressLength.
+  ///
+  /// In pt, this message translates to:
+  /// **'O endereço deve ter no máximo 255 caracteres.'**
+  String get invalidAddressLength;
 }
 
 class _AppLocalizationsDelegate

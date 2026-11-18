@@ -142,5 +142,12 @@
   "withdrawalsMetric": "Retirados",
   "myBooksSection": "Mis libros",
   "noBorrowedBooks": "No tienes libros prestados en este momento.",
-  "dueDateColumn": "Plazo"
+  "dueDateColumn": "Plazo",
+  "preferences": "Preferencias",
+  "selectLanguage": "Seleccione el idioma de la aplicación:",
+  "viewProfile": "Ver Perfil",
+  "editProfile": "Editar Perfil",
+  "profileUpdated": "¡Perfil actualizado con éxito!",
+  "emailChangedRelogin": "¡Correo actualizado! Inicie sesión nuevamente para continuar.",
+  "invalidAddressLength": "La dirección debe tener como máximo 255 caracteres."
 }

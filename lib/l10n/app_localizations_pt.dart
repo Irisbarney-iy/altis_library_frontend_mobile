@@ -446,4 +446,27 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dueDateColumn => 'Prazo';
+
+  @override
+  String get preferences => 'Preferências';
+
+  @override
+  String get selectLanguage => 'Selecione o idioma do aplicativo:';
+
+  @override
+  String get viewProfile => 'Visualizar Perfil';
+
+  @override
+  String get editProfile => 'Editar Perfil';
+
+  @override
+  String get profileUpdated => 'Perfil atualizado com sucesso!';
+
+  @override
+  String get emailChangedRelogin =>
+      'E-mail alterado! Faça login novamente para continuar.';
+
+  @override
+  String get invalidAddressLength =>
+      'O endereço deve ter no máximo 255 caracteres.';
 }

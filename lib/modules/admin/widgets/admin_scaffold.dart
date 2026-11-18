@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../auth/service/auth_service.dart';
 import '../../../core/services/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/preferences_dialog.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../auth/service/auth_service.dart';
 
 class AdminScaffold extends StatelessWidget {
   final String title;
@@ -38,19 +39,43 @@ class AdminScaffold extends StatelessWidget {
         ),
         actions: [
           PopupMenuButton<String>(
-            offset: const Offset(0, 48),
+            offset: const Offset(0, 52),
+            color: AppColors.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
             onSelected: (value) {
-              if (value == 'logout') _handleLogout(context);
+              if (value == 'preferences') {
+                showPreferencesDialog(context);
+              } else if (value == 'logout') {
+                _handleLogout(context);
+              }
             },
             itemBuilder: (context) => [
               PopupMenuItem(
+                value: 'preferences',
+                child: Center(
+                  child: Text(
+                    l10n.preferences,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ),
+              PopupMenuItem(
                 value: 'logout',
-                child: Row(
-                  children: [
-                    const Icon(Icons.logout, color: AppColors.primary, size: 20),
-                    const SizedBox(width: 8),
-                    Text(l10n.logout),
-                  ],
+                child: Center(
+                  child: Text(
+                    l10n.logout,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -162,7 +187,7 @@ class AdminScaffold extends StatelessWidget {
             fontSize: 14,
           ),
         ),
-      onTap: () {
+        onTap: () {
           Navigator.pop(context);
           if (!isActive) {
             Future.delayed(const Duration(milliseconds: 150), () {

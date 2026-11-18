@@ -909,6 +909,54 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Tentar novamente'**
   String get tryAgain;
+
+  /// No description provided for @menuProfile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil'**
+  String get menuProfile;
+
+  /// No description provided for @booksWithYou.
+  ///
+  /// In pt, this message translates to:
+  /// **'Livros com você'**
+  String get booksWithYou;
+
+  /// No description provided for @delaysMetric.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atrasos'**
+  String get delaysMetric;
+
+  /// No description provided for @overdueBooksSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Livros em atraso'**
+  String get overdueBooksSubtitle;
+
+  /// No description provided for @withdrawalsMetric.
+  ///
+  /// In pt, this message translates to:
+  /// **'Retiradas'**
+  String get withdrawalsMetric;
+
+  /// No description provided for @myBooksSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meus livros'**
+  String get myBooksSection;
+
+  /// No description provided for @noBorrowedBooks.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você não possui livros emprestados no momento.'**
+  String get noBorrowedBooks;
+
+  /// No description provided for @dueDateColumn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prazo'**
+  String get dueDateColumn;
 }
 
 class _AppLocalizationsDelegate

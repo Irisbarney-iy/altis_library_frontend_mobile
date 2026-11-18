@@ -134,5 +134,13 @@
   "daysOverdueColumn": "Days Overdue",
   "daySingular": "day",
   "daysPlural": "days",
-  "tryAgain": "Try again"
+  "tryAgain": "Try again",
+  "menuProfile": "Profile",
+  "booksWithYou": "Books with you",
+  "delaysMetric": "Delays",
+  "overdueBooksSubtitle": "Overdue books",
+  "withdrawalsMetric": "Returned",
+  "myBooksSection": "My books",
+  "noBorrowedBooks": "You currently have no borrowed books.",
+  "dueDateColumn": "Due Date"
 }

@@ -424,4 +424,28 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get tryAgain => 'Intentar de nuevo';
+
+  @override
+  String get menuProfile => 'Perfil';
+
+  @override
+  String get booksWithYou => 'Libros contigo';
+
+  @override
+  String get delaysMetric => 'Retrasos';
+
+  @override
+  String get overdueBooksSubtitle => 'Libros con retraso';
+
+  @override
+  String get withdrawalsMetric => 'Retirados';
+
+  @override
+  String get myBooksSection => 'Mis libros';
+
+  @override
+  String get noBorrowedBooks => 'No tienes libros prestados en este momento.';
+
+  @override
+  String get dueDateColumn => 'Plazo';
 }

@@ -134,5 +134,13 @@
   "daysOverdueColumn": "Días de Retraso",
   "daySingular": "día",
   "daysPlural": "días",
-  "tryAgain": "Intentar de nuevo"
+  "tryAgain": "Intentar de nuevo",
+  "menuProfile": "Perfil",
+  "booksWithYou": "Libros contigo",
+  "delaysMetric": "Retrasos",
+  "overdueBooksSubtitle": "Libros con retraso",
+  "withdrawalsMetric": "Retirados",
+  "myBooksSection": "Mis libros",
+  "noBorrowedBooks": "No tienes libros prestados en este momento.",
+  "dueDateColumn": "Plazo"
 }

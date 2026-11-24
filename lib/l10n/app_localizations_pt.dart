@@ -469,4 +469,23 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get invalidAddressLength =>
       'O endereço deve ter no máximo 255 caracteres.';
+
+  @override
+  String get changePassword => 'Alterar Senha';
+
+  @override
+  String get currentPassword => 'Senha atual';
+
+  @override
+  String get confirmNewPassword => 'Confirmar nova senha';
+
+  @override
+  String get currentPasswordRequired => 'Informe sua senha atual.';
+
+  @override
+  String get newPasswordMinLength =>
+      'A nova senha deve ter pelo menos 6 caracteres.';
+
+  @override
+  String get passwordChangedSuccess => 'Senha alterada com sucesso!';
 }

@@ -149,5 +149,11 @@
   "editProfile": "Editar Perfil",
   "profileUpdated": "Perfil atualizado com sucesso!",
   "emailChangedRelogin": "E-mail alterado! Faça login novamente para continuar.",
-  "invalidAddressLength": "O endereço deve ter no máximo 255 caracteres."
+  "invalidAddressLength": "O endereço deve ter no máximo 255 caracteres.",
+  "changePassword": "Alterar Senha",
+  "currentPassword": "Senha atual",
+  "confirmNewPassword": "Confirmar nova senha",
+  "currentPasswordRequired": "Informe sua senha atual.",
+  "newPasswordMinLength": "A nova senha deve ter pelo menos 6 caracteres.",
+  "passwordChangedSuccess": "Senha alterada com sucesso!"
 }

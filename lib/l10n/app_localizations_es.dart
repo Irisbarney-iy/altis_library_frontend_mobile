@@ -471,4 +471,23 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get invalidAddressLength =>
       'La dirección debe tener como máximo 255 caracteres.';
+
+  @override
+  String get changePassword => 'Cambiar Contraseña';
+
+  @override
+  String get currentPassword => 'Contraseña actual';
+
+  @override
+  String get confirmNewPassword => 'Confirmar nueva contraseña';
+
+  @override
+  String get currentPasswordRequired => 'Ingrese su contraseña actual.';
+
+  @override
+  String get newPasswordMinLength =>
+      'La nueva contraseña debe tener al menos 6 caracteres.';
+
+  @override
+  String get passwordChangedSuccess => '¡Contraseña cambiada con éxito!';
 }

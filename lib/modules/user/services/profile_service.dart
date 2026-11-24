@@ -51,6 +51,28 @@ class ProfileService {
     }
   }
 
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final headers = await AuthService.getAuthHeaders();
+
+    final response = await http
+        .patch(
+          Uri.parse('$_baseUrl/me/password'),
+          headers: headers,
+          body: jsonEncode({
+            'currentPassword': currentPassword,
+            'newPassword': newPassword,
+          }),
+        )
+        .timeout(const Duration(seconds: 10));
+
+    if (response.statusCode != 204 && response.statusCode != 200) {
+      throw Exception(_extractErrorMessage(response, 'Erro ao alterar senha'));
+    }
+  }
+
   String _extractErrorMessage(http.Response response, String fallback) {
     try {
       final decoded = jsonDecode(utf8.decode(response.bodyBytes));

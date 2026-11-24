@@ -999,6 +999,42 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'O endereço deve ter no máximo 255 caracteres.'**
   String get invalidAddressLength;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Alterar Senha'**
+  String get changePassword;
+
+  /// No description provided for @currentPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha atual'**
+  String get currentPassword;
+
+  /// No description provided for @confirmNewPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmar nova senha'**
+  String get confirmNewPassword;
+
+  /// No description provided for @currentPasswordRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe sua senha atual.'**
+  String get currentPasswordRequired;
+
+  /// No description provided for @newPasswordMinLength.
+  ///
+  /// In pt, this message translates to:
+  /// **'A nova senha deve ter pelo menos 6 caracteres.'**
+  String get newPasswordMinLength;
+
+  /// No description provided for @passwordChangedSuccess.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha alterada com sucesso!'**
+  String get passwordChangedSuccess;
 }
 
 class _AppLocalizationsDelegate

@@ -137,6 +137,213 @@ class _UserProfilePageState extends State<UserProfilePage> {
     }
   }
 
+Future<void> _openChangePasswordDialog() async {
+    final l10n = AppLocalizations.of(context)!;
+    final passwordFormKey = GlobalKey<FormState>();
+
+    final currentCtrl = TextEditingController();
+    final newCtrl = TextEditingController();
+    final confirmCtrl = TextEditingController();
+
+    bool obscureCurrent = true;
+    bool obscureNew = true;
+    bool obscureConfirm = true;
+    bool isSavingPassword = false;
+    String? dialogError;
+
+    void closeDialog(BuildContext dialogContext) {
+      FocusScope.of(dialogContext).unfocus();
+      Navigator.pop(dialogContext);
+    }
+
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (ctx, setDialogState) {
+            return AlertDialog(
+              backgroundColor: AppColors.background,
+              title: Row(
+                children: [
+                  const Icon(Icons.lock_reset_rounded, color: AppColors.primary),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      l10n.changePassword,
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              content: SingleChildScrollView(
+                child: Form(
+                  key: passwordFormKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (dialogError != null) ...[
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFADBD8),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors.error),
+                          ),
+                          child: Text(
+                            dialogError!,
+                            style: const TextStyle(
+                              color: AppColors.error,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+                      TextFormField(
+                        controller: currentCtrl,
+                        obscureText: obscureCurrent,
+                        decoration: InputDecoration(
+                          labelText: l10n.currentPassword,
+                          prefixIcon: const Icon(Icons.lock_outline, color: AppColors.primary),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              obscureCurrent ? Icons.visibility_off : Icons.visibility,
+                              color: AppColors.primary,
+                            ),
+                            onPressed: () {
+                              setDialogState(() => obscureCurrent = !obscureCurrent);
+                            },
+                          ),
+                        ),
+                        validator: (v) {
+                          if (v == null || v.isEmpty) {
+                            return l10n.currentPasswordRequired;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: newCtrl,
+                        obscureText: obscureNew,
+                        decoration: InputDecoration(
+                          labelText: l10n.newPassword,
+                          prefixIcon: const Icon(Icons.vpn_key_outlined, color: AppColors.primary),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              obscureNew ? Icons.visibility_off : Icons.visibility,
+                              color: AppColors.primary,
+                            ),
+                            onPressed: () {
+                              setDialogState(() => obscureNew = !obscureNew);
+                            },
+                          ),
+                        ),
+                        validator: (v) {
+                          if (v == null || v.length < 6) {
+                            return l10n.newPasswordMinLength;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: confirmCtrl,
+                        obscureText: obscureConfirm,
+                        decoration: InputDecoration(
+                          labelText: l10n.confirmNewPassword,
+                          prefixIcon: const Icon(Icons.check_circle_outline, color: AppColors.primary),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              obscureConfirm ? Icons.visibility_off : Icons.visibility,
+                              color: AppColors.primary,
+                            ),
+                            onPressed: () {
+                              setDialogState(() => obscureConfirm = !obscureConfirm);
+                            },
+                          ),
+                        ),
+                        validator: (v) {
+                          if (v != newCtrl.text) {
+                            return l10n.passwordsDoNotMatch;
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: isSavingPassword ? null : () => closeDialog(ctx),
+                  child: Text(
+                    l10n.cancel,
+                    style: const TextStyle(color: AppColors.primary),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: isSavingPassword
+                      ? null
+                      : () async {
+                          if (!passwordFormKey.currentState!.validate()) return;
+                          FocusScope.of(ctx).unfocus();
+                          setDialogState(() {
+                            isSavingPassword = true;
+                            dialogError = null;
+                          });
+
+                          try {
+                            await _service.changePassword(
+                              currentPassword: currentCtrl.text,
+                              newPassword: newCtrl.text,
+                            );
+                            if (!ctx.mounted) return;
+                            Navigator.pop(ctx);
+                            _showSnackBar(l10n.passwordChangedSuccess);
+                          } catch (e) {
+                            if (!ctx.mounted) return;
+                            setDialogState(() {
+                              isSavingPassword = false;
+                              dialogError = e.toString().replaceAll('Exception: ', '');
+                            });
+                          }
+                        },
+                  child: isSavingPassword
+                      ? const SizedBox(
+                          height: 18,
+                          width: 18,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : Text(l10n.save),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+
+    Future.delayed(const Duration(milliseconds: 300), () {
+      currentCtrl.dispose();
+      newCtrl.dispose();
+      confirmCtrl.dispose();
+    });
+  }
+
   void _showSnackBar(String message, {bool isError = false}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -300,6 +507,21 @@ class _UserProfilePageState extends State<UserProfilePage> {
           icon: const Icon(Icons.edit_outlined, size: 20),
           label: Text(
             l10n.editProfile,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        const SizedBox(height: 10),
+        OutlinedButton.icon(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: AppColors.primary,
+            side: const BorderSide(color: AppColors.primary),
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+          onPressed: _openChangePasswordDialog,
+          icon: const Icon(Icons.lock_outline, size: 20),
+          label: Text(
+            l10n.changePassword,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
